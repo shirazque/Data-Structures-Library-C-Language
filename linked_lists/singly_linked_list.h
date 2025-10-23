@@ -59,7 +59,7 @@ typedef struct linked_list {
 --------------------------------------------
 * Returns: Pointer to Linked List
 */
-LINKEDLIST* init();
+LINKEDLIST* list_init();
 
 /*
 --------------------------------------------
@@ -70,7 +70,7 @@ LINKEDLIST* init();
 --------------------------------------------
 * Returns: Size of the List
 */
-int length(LINKEDLIST *ll);
+int list_length(LINKEDLIST *ll);
 
 /*
 --------------------------------------------
@@ -84,7 +84,7 @@ int length(LINKEDLIST *ll);
 --------------------------------------------
 * Returns: 1 if inserted, 0 otherwise
 */
-int insert(LINKEDLIST *ll, int index, int user_id, char *username);
+int list_insert(LINKEDLIST *ll, int index, int user_id, char *username);
 
 /*
 --------------------------------------------
@@ -97,7 +97,7 @@ int insert(LINKEDLIST *ll, int index, int user_id, char *username);
 --------------------------------------------
 * Returns: 1 if prepended, 0 otherwise
 */
-int prepend(LINKEDLIST *ll, int user_id, char *username);
+int list_prepend(LINKEDLIST *ll, int user_id, char *username);
 
 /*
 --------------------------------------------
@@ -110,24 +110,12 @@ int prepend(LINKEDLIST *ll, int user_id, char *username);
 --------------------------------------------
 * Returns: 1 if appended, 0 otherwise
 */
-int append(LINKEDLIST *ll, int user_id, char *username);
+int list_append(LINKEDLIST *ll, int user_id, char *username);
 
 /*
 --------------------------------------------
-* Function: Removes user by Index
-* Parameters:
-    1. LINKEDLIST *ll: Pointer to Linked List
-    2. int index: Index of Node
-* Time & Space Complexity: O(n), O(1)
---------------------------------------------
-* Returns: Copied contents of Node data in
-copied USER struct
-*/
-USER remove_by_index(LINKEDLIST *ll, int index);
-
-/*
---------------------------------------------
-* Function: Removes user by Index
+* Function: Removes user by Key. Removes
+first occurence
 * Parameters:
     1. LINKEDLIST *ll: Pointer to Linked List
     2. int user_id_key: User ID
@@ -136,7 +124,7 @@ USER remove_by_index(LINKEDLIST *ll, int index);
 * Returns: Copied contents of Node data in
 copied USER struct
 */
-USER remove_by_key(LINKEDLIST *ll, int user_id_key);
+USER list_remove_by_key(LINKEDLIST *ll, int user_id_key);
 
 /*
 --------------------------------------------
@@ -148,7 +136,7 @@ USER remove_by_key(LINKEDLIST *ll, int user_id_key);
 --------------------------------------------
 * Returns: 1 if reversed, 0 otherwise
 */
-int reverse(LINKEDLIST *ll);
+int list_reverse(LINKEDLIST *ll);
 
 /*------------------------------------------------
 Function: Frees the List and all its
@@ -162,6 +150,6 @@ Returns:
     N/A
 ------------------------------------------------*/
 
-int wipe_list(LINKEDLIST *ll);
+int list_wipe(LINKEDLIST *ll);
 
 #endif

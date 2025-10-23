@@ -9,9 +9,9 @@ Search Tree
 #include <stdio.h> // Includes the Standard Input Output package
 #include <stdlib.h> // Includes the Standard Library header
 #include <binary_search_tree.h> // Includes Binary Search Tree Header
-#include <linked_list_stack_queue.h> // Includes the Auxiliary Stack and Queue Data Structure
+#include <stack_queue/linked_list_stack_queue.h> // Includes the Auxiliary Stack and Queue Data Structure
 
-BST* init() {
+BST* bst_init() {
     BST *bt = malloc(sizeof(BST)); // Allocate space for new tree and return it as a pointer to that space
 
     if (bt) {
@@ -54,7 +54,7 @@ TREENODE* new_node(BST *bt, char *username, int user_id) {
     return node;
 }
 
-int insert(BST *bt, char *username, int user_id) {
+int bst_insert(BST *bt, char *username, int user_id) {
     int inserted = 0;
 
     if (bt) {
@@ -98,7 +98,7 @@ int insert(BST *bt, char *username, int user_id) {
     return inserted;
 }
 
-USER remove(BST *bt, int user_id) {
+USER bst_remove(BST *bt, int user_id) {
     int removed = 0;
     USER removed_user = { 0 }; // New structure that holds the contents of the removed node. If node is not found, empty struct will be returned
 
@@ -196,7 +196,7 @@ TREENODE *repl_and_patch(TREENODE *to_remove) {
     return replacement_node;
 }
 
-void preorder_traversal(BST *bt, USER user_list[]) {
+void bst_preorder(BST *bt, USER user_list[]) {
     if (bt){
         int i = 0;
         preorder_aux(bt->root, user_list, &i);        
@@ -228,7 +228,7 @@ void preorder_aux(TREENODE *node, USER user_list[], int *current_index){
     }
 }
 
-void inorder_traversal(BST *bt, USER user_list[]){
+void bst_inorder(BST *bt, USER user_list[]){
     if (bt){
         int i = 0;
         inorder_aux(bt->root, user_list, &i);    
@@ -261,7 +261,7 @@ void inorder_aux(TREENODE *node, USER user_list[], int *current_index){
     }
 }
 
-void postorder_traversal(BST *bt, USER user_list[]){
+void bst_postorder(BST *bt, USER user_list[]){
     if (bt){
         int i = 0;
         postorder_aux(bt->root, user_list, &i);    
@@ -294,7 +294,7 @@ void postorder_aux(TREENODE *node, USER user_list[], int *current_index){
     }
 }
 
-USER breadth_first_search(BST *bt, int user_id) {
+USER bst_bfs(BST *bt, int user_id) {
     USER user = { 0 }; // Define a struct to copy user contents once found
     
     if (bt) {
@@ -333,7 +333,7 @@ USER breadth_first_search(BST *bt, int user_id) {
     return user;
 }
 
-USER depth_first_search(BST *bt, int user_id) {
+USER bst_dfs(BST *bt, int user_id) {
     USER user = { 0 }; // Define a struct to copy user contents once found
     
     if (bt) {
@@ -371,7 +371,7 @@ USER depth_first_search(BST *bt, int user_id) {
     return user;
 }
 
-int wipe_tree(BST *bt) {
+int bst_wipe(BST *bt) {
     int wiped = 0;
 
     if (bt){

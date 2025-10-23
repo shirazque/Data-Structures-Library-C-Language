@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "adelson_velsky_landis_tree.h": "c",
+        "linked_list_priority_queue.h": "c"
+    }
+}

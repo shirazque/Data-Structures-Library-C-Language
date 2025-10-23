@@ -1,9 +1,14 @@
 
 #include <stdio.h> // Includes the Standard Input Output package
 #include <stdlib.h> // Includes the Standard Library header
+
 #include <stack_queue/array_stack.h> // Include Stack Header
 #include <stack_queue/array_circular_deque.h> // Include Deque Header
 #include <stack_queue/linked_list_priority_queue.h> // Include Priority Queue Header
+#include <linked_lists/singly_linked_list.h> // Include Singly Linked List Header
+#include <binary_search_trees/binary_search_tree.h> // Include Binary Search Tree Header
+#include <binary_search_trees/adelson_velsky_landis_tree.h> // Include AVL Tree Header
+
 #define MAX_LENGTH 10 // Define a Max length for Array-based Structures
 
 // Dataset for Stacks and Queues
@@ -118,13 +123,22 @@ void test_linked_list_priority_queue() {
         printf("");
     }
 
+    // Destroy the Queue
+    pq_wipe(new_pq);
+
 }
 
 // W.I.P
-void test_singly_linked_list();
+void test_singly_linked_list() {
+    printf("--------------------- Testing for Singly Linked List ---------------------");
+}
 
 // W.I.P
-void test_bst();
+void test_bst() {
+    printf("--------------------- Testing for Standard Binary Search Tree ---------------------");
+}
 
 // W.I.P
-void test_avl();
+void test_avl() {
+    printf("--------------------- Testing for AVL Tree ---------------------");
+}

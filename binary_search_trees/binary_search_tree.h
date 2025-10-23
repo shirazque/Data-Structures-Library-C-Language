@@ -54,7 +54,7 @@ Time and Space Complexity: O(1), O(1)
 Returns:
     Pointer to an allocated BST
 ------------------------------------------------*/
-BST* init();
+BST* bst_init();
 
 /*------------------------------------------------
 Function: Inserts new User struct into a BST.
@@ -70,7 +70,7 @@ Traversal type: Iterative
 Returns:
     1 if inserted, 0 otherwise
 ------------------------------------------------*/
-int insert(BST *bt, char *username, int user_id);
+int bst_insert(BST *bt, char *username, int user_id);
 
 /*------------------------------------------------
 Function: Removes a User from a BST.
@@ -90,7 +90,7 @@ Returns:
         b. Members being assigned 0. Indicates
         unsuccessful removal. 
 ------------------------------------------------*/
-USER remove(BST *bt, int user_id); 
+USER bst_remove(BST *bt, int user_id); 
 
 /*------------------------------------------------
 Function: Returns an array of all usernames in preorder
@@ -104,7 +104,7 @@ Traversal type: Recursive
 Returns:
     N/A
 ------------------------------------------------*/
-void preorder_traversal(BST *bt, USER user_list[]);
+void bst_preorder(BST *bt, USER user_list[]);
 
 /*------------------------------------------------
 Function: Returns an array of all usernames inorder
@@ -118,7 +118,7 @@ Traversal type: Recursive
 Returns:
     N/A
 ------------------------------------------------*/
-void inorder_traversal(BST *bt, USER user_list[]);
+void bst_inorder(BST *bt, USER user_list[]);
 
 /*------------------------------------------------
 Function: Returns an array of all usernames in postorder
@@ -132,7 +132,7 @@ Traversal type: Recursive
 Returns:
     N/A
 ------------------------------------------------*/
-void postorder_traversal(BST *bt, USER user_list[]);
+void bst_postorder(BST *bt, USER user_list[]);
 
 /*------------------------------------------------
 Function: Performs a level by level traversal to
@@ -152,7 +152,7 @@ Returns:
         b. Members being assigned 0. Indicates
         unsuccessful search. 
 ------------------------------------------------*/
-USER breadth_first_search(BST *bt, int user_id);
+USER bst_bfs(BST *bt, int user_id);
 
 /*------------------------------------------------
 Function: Performs a deep-subsequently-wide traversal 
@@ -173,7 +173,7 @@ Returns:
         b. Members being assigned 0. Indicates
         unsuccessful search. 
 ------------------------------------------------*/
-USER depth_first_search(BST *bt, int user_id);
+USER bst_dfs(BST *bt, int user_id);
 
 /*------------------------------------------------
 Function: Frees the Binary Search Tree and all its
@@ -186,6 +186,6 @@ Traversal type: Recursive
 Returns:
     N/A
 ------------------------------------------------*/
-void wipe_bst(BST *bt);
+void bst_wipe(BST *bt);
 
 #endif

@@ -10,7 +10,7 @@ Description: Implementation of Linked List
 #include <singly_linked_list.h>
 
 
-LINKEDLIST* init() {
+LINKEDLIST* list_init() {
     LINKEDLIST *new_list = malloc(sizeof(LINKEDLIST));
 
     if (new_list) {
@@ -22,7 +22,7 @@ LINKEDLIST* init() {
     return new_list;
 }
 
-int length(LINKEDLIST *ll) {
+int list_length(LINKEDLIST *ll) {
     int size = 0;
 
     if (ll) {
@@ -49,7 +49,7 @@ LINKEDLIST* new_node(LINKEDLIST *ll, char *username, int user_id) {
     return node;
 }
 
-int insert(LINKEDLIST *ll, int index, int user_id, char *username) {
+int list_insert(LINKEDLIST *ll, int index, int user_id, char *username) {
     int inserted = 0;
 
     if (ll) {
@@ -99,7 +99,7 @@ int insert(LINKEDLIST *ll, int index, int user_id, char *username) {
     return inserted;
 }
 
-int prepend(LINKEDLIST *ll, int user_id, char *username) {
+int list_prepend(LINKEDLIST *ll, int user_id, char *username) {
     int prepended = 0;
 
     if (ll) {
@@ -123,7 +123,7 @@ int prepend(LINKEDLIST *ll, int user_id, char *username) {
     return prepended;
 }
 
-int append(LINKEDLIST *ll, int user_id, char *username) {
+int list_append(LINKEDLIST *ll, int user_id, char *username) {
     int appended = 0;
 
     if (ll) {
@@ -147,7 +147,7 @@ int append(LINKEDLIST *ll, int user_id, char *username) {
     return appended;
 }
 
-USER remove_by_key(LINKEDLIST *ll, int user_id_key) {
+USER list_remove_by_key(LINKEDLIST *ll, int user_id_key) {
     USER removed = { 0 }; 
 
     if (ll) {
@@ -222,7 +222,7 @@ NODE *linear_search(LINKEDLIST *ll, int key) {
     return previous;
 }
 
-int reverse(LINKEDLIST *ll) {
+int list_reverse(LINKEDLIST *ll) {
     int reversed = 0;
 
     if (ll) {
@@ -253,7 +253,7 @@ int reverse(LINKEDLIST *ll) {
     return reversed;
 }
 
-int wipe_list(LINKEDLIST *ll) {
+int list_wipe(LINKEDLIST *ll) {
     NODE *node = ll->head;
     int wiped = 0;
 
