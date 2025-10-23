@@ -8,7 +8,7 @@ Testing
 
 #include <stdio.h> // Includes the Standard Input Output package
 #include <stdlib.h> // Includes the Standard Library Header
-#include <testing/test.h> // Includes the Testing Header
+#include <test.h> // Includes the Testing Header
 
 void test_array_stack() {
     printf("--------------------- Testing for Array-based Stack ---------------------");

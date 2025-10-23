@@ -9,12 +9,12 @@ Testing
 #include <stdio.h> // Includes the Standard Input Output package
 #include <stdlib.h> // Includes the Standard Library Header
 
-#include <stack_queue/array_stack.h> // Include Stack Header
-#include <stack_queue/array_circular_deque.h> // Include Deque Header
-#include <stack_queue/linked_list_priority_queue.h> // Include Priority Queue Header
-#include <linked_lists/singly_linked_list.h> // Include Singly Linked List Header
-#include <binary_search_trees/binary_search_tree.h> // Include Binary Search Tree Header
-#include <binary_search_trees/adelson_velsky_landis_tree.h> // Include AVL Tree Header
+#include <array_stack.h> // Include Stack Header
+#include <array_circular_deque.h> // Include Deque Header
+#include <linked_list_priority_queue.h> // Include Priority Queue Header
+#include <singly_linked_list.h> // Include Singly Linked List Header
+#include <binary_search_tree.h> // Include Binary Search Tree Header
+#include <adelson_velsky_landis_tree.h> // Include AVL Tree Header
 
 #define MAX_LENGTH 10 // Define a Max length for Array-based Structures
 #ifndef TEST

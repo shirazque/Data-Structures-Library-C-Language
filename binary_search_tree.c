@@ -9,7 +9,7 @@ Search Tree
 #include <stdio.h> // Includes the Standard Input Output package
 #include <stdlib.h> // Includes the Standard Library header
 #include <binary_search_tree.h> // Includes Binary Search Tree Header
-#include <stack_queue/linked_list_stack_queue.h> // Includes the Auxiliary Stack and Queue Data Structure
+#include <linked_list_stack_queue.h> // Includes the Auxiliary Stack and Queue Data Structure
 
 BST* bst_init() {
     BST *bt = malloc(sizeof(BST)); // Allocate space for new tree and return it as a pointer to that space

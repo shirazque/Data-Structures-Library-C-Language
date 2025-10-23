@@ -72,3 +72,5 @@ void stack_wipe(STACK *as) {
         free(as);
     }
 }
+
+

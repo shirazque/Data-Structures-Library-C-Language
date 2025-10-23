@@ -97,40 +97,44 @@ int insert_aux(AVLTREE *avl, AVLNODE **curr_pointer, char *username, int user_id
         }
 
         if (!(*already_inserted)){
-            // Update the ancestor heights and tree structure via rotations from leaf to root
-            int balance_factor = get_bf_aux(*curr_pointer); // Get the balance factor from newly inserted node to root
-
-            if (balance_factor < -1) {
-                // Left Rotation
-                int balance_factor_right = get_bf_aux((*curr_pointer)->right); // Gets balance factor of left of curr
-                
-                if (balance_factor_right == 1) {
-                    // Right-Left Case: Perform a right rotation on left child of curr
-                    (*curr_pointer)->right = rotate_right_aux((*curr_pointer)->right);
-                }
-
-                // Perform a left rotation on curr
-                *(curr_pointer) = rotate_left_aux(*curr_pointer);            
-            }
-
-            else if (balance_factor > 1) {
-                int balance_factor_left = get_bf_aux((*curr_pointer)->left); // Gets balance factor of left of curr
-                
-                if (balance_factor_left == -1) {
-                    // Left-Right Case: Perform a left rotation on left child of curr
-                    (*curr_pointer)->left = rotate_left_aux((*curr_pointer)->left);
-                }
-
-                // Perform a right rotation on curr
-                *(curr_pointer) = rotate_right_aux(*curr_pointer);            
-            }
+            balance_insert_remove(&(*curr_pointer));
         }
     }
 
     return *already_inserted;
 }
 
-AVLUSER avl_remove(AVLTREE *avl, int user_id); // W.I.P
+void balance_insert_remove(AVLNODE **node) {
+    update_height_aux(&(*node));
+    
+    // Update the ancestor heights and tree structure via rotations from leaf to root
+    int balance_factor = get_bf_aux(*node); // Get the balance factor from newly inserted node to root
+
+    if (balance_factor < -1) {
+        // Left Rotation
+        int balance_factor_right = get_bf_aux((*node)->right); // Gets balance factor of left of curr
+        
+        if (balance_factor_right == 1) {
+            // Right-Left Case: Perform a right rotation on left child of curr
+            (*node)->right = rotate_right_aux((*node)->right);
+        }
+
+        // Perform a left rotation on currf
+        *(node) = rotate_left_aux(*node);            
+    }
+
+    else if (balance_factor > 1) {
+        int balance_factor_left = get_bf_aux((*node)->left); // Gets balance factor of left of curr
+        
+        if (balance_factor_left == -1) {
+            // Left-Right Case: Perform a left rotation on left child of curr
+            (*node)->left = rotate_left_aux((*node)->left);
+        }
+
+        // Perform a right rotation on curr
+        *(node) = rotate_right_aux(*node);            
+    }
+}
 
 /*------------------------------------------------
 Auxiliary function: Returns the Balance factor of
@@ -202,6 +206,38 @@ AVLNODE *rotate_right_aux(AVLNODE *node) {
     update_height_aux(new_parent);
 
     return new_parent;
+}
+
+/*------------------------------------------------
+Auxiliary function: Update a node's height
+Parameters:
+    1. AVLNODE *node: Pointer to an AVL Node
+-------------------------------------------------
+Returns:
+    N/A
+------------------------------------------------*/
+void update_height_aux(AVLNODE *node) {
+    int left_child_height = 0;
+    int right_child_height = 0;
+
+    if (node->left) {
+        // Grab the left child height
+        left_child_height = node->left;
+    }
+
+    if (node->right) {
+        // Grab the right child height
+        right_child_height = node->right;
+    }
+
+    if (left_child_height >= right_child_height) {
+        node->height = 1 + left_child_height;
+    }
+
+    else {
+        node->height = 1 + right_child_height;
+    }
+
 }
 
 void avl_wipe(AVLTREE *avl){
