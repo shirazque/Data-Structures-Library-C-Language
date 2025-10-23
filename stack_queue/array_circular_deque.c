@@ -11,7 +11,7 @@ Description: Implementation for Array-based
 #include <stdlib.h> // Includes the standard library header
 #include <array_circular_deque.h>
 
-DEQUE* init_deque(int capacity){
+DEQUE* deque_init(int capacity){
     DEQUE *new_queue = malloc(sizeof(DEQUE)); // Allocates space for the deque structure and returns a pointer to it
     
     if (new_queue) {
@@ -26,7 +26,7 @@ DEQUE* init_deque(int capacity){
     return new_queue;
 }
 
-int insert_rear(DEQUE *adq, int value) {
+int deque_insert_rear(DEQUE *adq, int value) {
     int inserted = 0;
     int to_insert = 0;
 
@@ -47,7 +47,7 @@ int insert_rear(DEQUE *adq, int value) {
     return inserted;
 }
 
-DATA remove_front(DEQUE *adq) {
+DATA deque_remove_front(DEQUE *adq) {
     DATA removed = { 0 };
     
     if (adq->front != -1){
@@ -70,7 +70,7 @@ DATA remove_front(DEQUE *adq) {
     return removed;
 }
 
-DATA remove_rear(DEQUE *adq) {
+DATA deque_remove_rear(DEQUE *adq) {
     DATA removed = { 0 };
 
     if (adq->front != -1){
@@ -94,7 +94,7 @@ DATA remove_rear(DEQUE *adq) {
     return removed;
 }
 
-int peek_front(DEQUE *adq) {
+int deque_peek_front(DEQUE *adq) {
     int peeked = 0;
 
     if (adq->front > -1){
@@ -105,7 +105,7 @@ int peek_front(DEQUE *adq) {
     return peeked;
 }
 
-int peek_rear(DEQUE *adq) {
+int deque_peek_rear(DEQUE *adq) {
     int peeked = 0;
 
     if (adq->front > -1){
@@ -117,7 +117,7 @@ int peek_rear(DEQUE *adq) {
     return peeked;
 }
 
-int wipe_deque(DEQUE *adq) {
+int deque_wipe(DEQUE *adq) {
     int wiped = 0;
 
     if (adq) {

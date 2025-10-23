@@ -5,7 +5,7 @@ Date of Publication: 2025-10-23
 List of Structures complete:
 
     1. Array-based Stack
-    2. Array-based Circular Deque (pronounced "Deck" 🙂) 
+    2. Array-based Circular Deque (Input Restricted) 
     3. Linked List-based Stack                          <- Auxiliary Data Structure for BST Depth First Search
     4. Linked List-based Queue                          <- Auxiliary Data Structure for BST Breadth First Search
     5. Linked List-based Priority Queue 
