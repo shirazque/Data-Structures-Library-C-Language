@@ -17,10 +17,10 @@ Members:
     1. int id: Holds the user id
     2. char name[25]: Holds the username of the user
 -------------------------------------------------*/
-typedef struct user {
+typedef struct avl_user {
     int id;
     char name[25];
-} USER;
+} AVLUSER;
 
 /*------------------------------------------------
 Structure: AVL Tree Node
@@ -33,7 +33,7 @@ Members:
     5. AVLNODE *right: Pointer to right child node
 -------------------------------------------------*/
 typedef struct avl_node {
-    USER user;
+    AVLUSER user;
     int height;
     int balance_factor;
     struct avl_node *left;
@@ -60,7 +60,7 @@ Time and Space Complexity: O(1), O(1)
 Returns:
     Pointer to an allocated AVL Tree
 ------------------------------------------------*/
-AVLTREE* init();
+AVLTREE* avl_init();
 
 /*------------------------------------------------
 Function: Inserts new User struct into an AVL.
@@ -76,7 +76,7 @@ Traversal type: Recursive
 Returns:
     1 if inserted, 0 otherwise
 ------------------------------------------------*/
-int insert(AVLTREE *avl, char *username, int user_id);
+int avl_insert(AVLTREE *avl, char *username, int user_id);
 
 /*------------------------------------------------
 Function: Removes a User from an AVL.
@@ -95,7 +95,7 @@ Returns:
         b. Members being assigned 0. Indicates
         unsuccessful removal. 
 ------------------------------------------------*/
-USER remove(AVLTREE *avl, int user_id); 
+AVLUSER avl_remove(AVLTREE *avl, int user_id); 
 
 /*------------------------------------------------
 Function: Frees the AVL Tree and all its
@@ -107,6 +107,6 @@ Time and Space Complexity: O(n), O(1)
 Returns:
     N/A
 ------------------------------------------------*/
-void wipe_avl(AVLTREE *avl);
+void avl_wipe(AVLTREE *avl);
 
 #endif

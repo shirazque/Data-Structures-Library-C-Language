@@ -10,7 +10,7 @@ Adelson-Velsky-Landis (AVL) Tree
 #include <stdlib.h> // Includes the Standard Library header
 #include <adelson_velsky_landis_tree.h>
 
-AVLTREE* init(){
+AVLTREE* avl_init(){
     AVLTREE *avl = malloc(sizeof(AVLTREE)); // Allocate space for new tree and return it as a pointer to that space
 
     if (avl) {
@@ -40,7 +40,7 @@ AVLTREE* new_node(AVLTREE *avl, char *username, int user_id) {
     return node;
 }
 
-int insert(AVLTREE *avl, char *username, int user_id) {
+int avl_insert(AVLTREE *avl, char *username, int user_id) {
     int inserted = 1;
     int already_inserted = 0;
 
@@ -130,7 +130,7 @@ int insert_aux(AVLTREE *avl, AVLNODE **curr_pointer, char *username, int user_id
     return *already_inserted;
 }
 
-USER remove(AVLTREE *avl, int user_id); // W.I.P
+AVLUSER avl_remove(AVLTREE *avl, int user_id); // W.I.P
 
 /*------------------------------------------------
 Auxiliary function: Returns the Balance factor of
@@ -204,7 +204,7 @@ AVLNODE *rotate_right_aux(AVLNODE *node) {
     return new_parent;
 }
 
-void wipe_avl(AVLTREE *avl){
+void avl_wipe(AVLTREE *avl){
     int wiped = 0;
 
     if (avl){

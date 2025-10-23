@@ -16,10 +16,10 @@ Members:
     1. int id: Holds the user id
     2. char name[25]: Holds the username of the user
 -------------------------------------------------*/
-typedef struct user {
+typedef struct bst_user {
     int id;
     char name[25];
-} USER;
+} BSTUSER;
 
 /*------------------------------------------------
 Structure: Binary Search Tree Node
@@ -29,7 +29,7 @@ Members:
     3. TREENODE *right: Pointer to right child node
 -------------------------------------------------*/
 typedef struct tree_node {
-    USER user;
+    BSTUSER user;
     struct tree_node *left;
     struct tree_node *right;
 } TREENODE;
@@ -90,7 +90,7 @@ Returns:
         b. Members being assigned 0. Indicates
         unsuccessful removal. 
 ------------------------------------------------*/
-USER bst_remove(BST *bt, int user_id); 
+BSTUSER bst_remove(BST *bt, int user_id); 
 
 /*------------------------------------------------
 Function: Returns an array of all usernames in preorder
@@ -104,7 +104,7 @@ Traversal type: Recursive
 Returns:
     N/A
 ------------------------------------------------*/
-void bst_preorder(BST *bt, USER user_list[]);
+void bst_preorder(BST *bt, BSTUSER user_list[]);
 
 /*------------------------------------------------
 Function: Returns an array of all usernames inorder
@@ -118,7 +118,7 @@ Traversal type: Recursive
 Returns:
     N/A
 ------------------------------------------------*/
-void bst_inorder(BST *bt, USER user_list[]);
+void bst_inorder(BST *bt, BSTUSER user_list[]);
 
 /*------------------------------------------------
 Function: Returns an array of all usernames in postorder
@@ -132,7 +132,7 @@ Traversal type: Recursive
 Returns:
     N/A
 ------------------------------------------------*/
-void bst_postorder(BST *bt, USER user_list[]);
+void bst_postorder(BST *bt, BSTUSER user_list[]);
 
 /*------------------------------------------------
 Function: Performs a level by level traversal to
@@ -152,7 +152,7 @@ Returns:
         b. Members being assigned 0. Indicates
         unsuccessful search. 
 ------------------------------------------------*/
-USER bst_bfs(BST *bt, int user_id);
+BSTUSER bst_bfs(BST *bt, int user_id);
 
 /*------------------------------------------------
 Function: Performs a deep-subsequently-wide traversal 
@@ -173,7 +173,7 @@ Returns:
         b. Members being assigned 0. Indicates
         unsuccessful search. 
 ------------------------------------------------*/
-USER bst_dfs(BST *bt, int user_id);
+BSTUSER bst_dfs(BST *bt, int user_id);
 
 /*------------------------------------------------
 Function: Frees the Binary Search Tree and all its

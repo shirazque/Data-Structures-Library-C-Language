@@ -98,9 +98,9 @@ int bst_insert(BST *bt, char *username, int user_id) {
     return inserted;
 }
 
-USER bst_remove(BST *bt, int user_id) {
+BSTUSER bst_remove(BST *bt, int user_id) {
     int removed = 0;
-    USER removed_user = { 0 }; // New structure that holds the contents of the removed node. If node is not found, empty struct will be returned
+    BSTUSER removed_user = { 0 }; // New structure that holds the contents of the removed node. If node is not found, empty struct will be returned
 
     if (bt) {
         TREENODE **curr_pointer = &(bt->root);  // Pointer storing address of the pointer of root, i.e., current node we are accessing
@@ -196,7 +196,7 @@ TREENODE *repl_and_patch(TREENODE *to_remove) {
     return replacement_node;
 }
 
-void bst_preorder(BST *bt, USER user_list[]) {
+void bst_preorder(BST *bt, BSTUSER user_list[]) {
     if (bt){
         int i = 0;
         preorder_aux(bt->root, user_list, &i);        
@@ -216,7 +216,7 @@ Parameters:
 Returns:
     N/A
 ------------------------------------------------*/
-void preorder_aux(TREENODE *node, USER user_list[], int *current_index){
+void preorder_aux(TREENODE *node, BSTUSER user_list[], int *current_index){
     if (node) {
         // Store the username in an array, increment the index by 1
         user_list[*current_index] = node->user;
@@ -228,7 +228,7 @@ void preorder_aux(TREENODE *node, USER user_list[], int *current_index){
     }
 }
 
-void bst_inorder(BST *bt, USER user_list[]){
+void bst_inorder(BST *bt, BSTUSER user_list[]){
     if (bt){
         int i = 0;
         inorder_aux(bt->root, user_list, &i);    
@@ -247,7 +247,7 @@ Parameters:
 Returns:
     N/A
 ------------------------------------------------*/
-void inorder_aux(TREENODE *node, USER user_list[], int *current_index){
+void inorder_aux(TREENODE *node, BSTUSER user_list[], int *current_index){
     if (node) {
         // Recursively traverse to the left subtree
         inorder_aux(node->left, user_list, current_index);
@@ -261,7 +261,7 @@ void inorder_aux(TREENODE *node, USER user_list[], int *current_index){
     }
 }
 
-void bst_postorder(BST *bt, USER user_list[]){
+void bst_postorder(BST *bt, BSTUSER user_list[]){
     if (bt){
         int i = 0;
         postorder_aux(bt->root, user_list, &i);    
@@ -281,7 +281,7 @@ Parameters:
 Returns:
     N/A
 ------------------------------------------------*/
-void postorder_aux(TREENODE *node, USER user_list[], int *current_index){
+void postorder_aux(TREENODE *node, BSTUSER user_list[], int *current_index){
     if (node) {
         // Recursively traverse to the left and right subtrees
         postorder_aux(node->left, user_list, current_index);
@@ -294,8 +294,8 @@ void postorder_aux(TREENODE *node, USER user_list[], int *current_index){
     }
 }
 
-USER bst_bfs(BST *bt, int user_id) {
-    USER user = { 0 }; // Define a struct to copy user contents once found
+BSTUSER bst_bfs(BST *bt, int user_id) {
+    BSTUSER user = { 0 }; // Define a struct to copy user contents once found
     
     if (bt) {
         QUEUE *queue = init_queue(); // Pointer to a newly allocated Queue
@@ -333,8 +333,8 @@ USER bst_bfs(BST *bt, int user_id) {
     return user;
 }
 
-USER bst_dfs(BST *bt, int user_id) {
-    USER user = { 0 }; // Define a struct to copy user contents once found
+BSTUSER bst_dfs(BST *bt, int user_id) {
+    BSTUSER user = { 0 }; // Define a struct to copy user contents once found
     
     if (bt) {
         STACK *stack = init_stack(); // Pointer to a newly allocated Stack 

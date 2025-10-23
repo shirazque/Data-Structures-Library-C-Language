@@ -16,10 +16,10 @@ Members:
     1. int id: Holds the user id
     2. char name[25]: Holds the username of the user
 -------------------------------------------------*/
-typedef struct user {
+typedef struct ll_user {
     int id;
-    char name[25];
-} USER;
+    char *name[25];
+} LLUSER;
 
 /*
 --------------------------------------------
@@ -31,8 +31,8 @@ typedef struct user {
 --------------------------------------------
 */
 typedef struct node {
-    USER data;
-    NODE *next;
+    LLUSER data;
+    struct node *next;
 } NODE;
 
 /*
@@ -124,7 +124,7 @@ first occurence
 * Returns: Copied contents of Node data in
 copied USER struct
 */
-USER list_remove_by_key(LINKEDLIST *ll, int user_id_key);
+LLUSER list_remove_by_key(LINKEDLIST *ll, int user_id_key);
 
 /*
 --------------------------------------------
@@ -144,12 +144,24 @@ contents from memory.
 Parameters:
     1. LINKEDLIST *ll: Pointer to Linked List
 Time and Space Complexity: O(n), O(1)
-Traversal type: Recursive
+Traversal type: Iterative
 -------------------------------------------------
 Returns:
     N/A
 ------------------------------------------------*/
-
 int list_wipe(LINKEDLIST *ll);
+
+/*------------------------------------------------
+Function: Traverses and prints the contents of the
+List
+Parameters:
+    1. LINKEDLIST *ll: Pointer to Linked List
+Time and Space Complexity: O(n), O(1)
+Traversal type: Iterative
+-------------------------------------------------
+Returns:
+    N/A
+------------------------------------------------*/
+void list_iterate(LINKEDLIST *ll);
 
 #endif

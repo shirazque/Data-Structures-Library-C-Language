@@ -147,8 +147,8 @@ int list_append(LINKEDLIST *ll, int user_id, char *username) {
     return appended;
 }
 
-USER list_remove_by_key(LINKEDLIST *ll, int user_id_key) {
-    USER removed = { 0 }; 
+LLUSER list_remove_by_key(LINKEDLIST *ll, int user_id_key) {
+    LLUSER removed = { 0 }; 
 
     if (ll) {
         if (ll->head) {
@@ -251,6 +251,26 @@ int list_reverse(LINKEDLIST *ll) {
     }
 
     return reversed;
+}
+
+void list_iterate(LINKEDLIST *ll) {
+    if (ll) {
+        if (ll->head) {
+            printf("Database of users: ");
+            printf("-------------------");
+            NODE *curr = ll->head;
+
+            while (curr) {
+                printf("user: %d, %s", curr->data.id, curr->data.name);
+                printf("");
+            }
+        }
+
+        else {
+            printf("List is empty");
+            printf("");
+        }
+    }
 }
 
 int list_wipe(LINKEDLIST *ll) {
