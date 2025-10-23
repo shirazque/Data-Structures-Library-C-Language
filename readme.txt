@@ -8,14 +8,14 @@ List of Structures complete:
     2. Array-based Circular Deque (pronounced "Deck" 🙂) 
     3. Linked List-based Stack                          <- Auxiliary Data Structure for BST Depth First Search
     4. Linked List-based Queue                          <- Auxiliary Data Structure for BST Breadth First Search
-    5. Linked List-based Priority Queue (W.I.P.)
+    5. Linked List-based Priority Queue 
     6. Linked List
     7. Binary Search Tree
     8. AVL (Adelson, Velsky, & Landis) Tree (partially)
 
 List of Structures in progress:
 
-    1. Red Black Tree
+    1. Red Back Tree 
     2. Minimum Heap
     3. m-ary Tree
     4. Splay Tree
