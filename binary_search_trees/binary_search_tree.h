@@ -30,8 +30,8 @@ Members:
 -------------------------------------------------*/
 typedef struct tree_node {
     USER user;
-    TREENODE *left;
-    TREENODE *right;
+    struct tree_node *left;
+    struct tree_node *right;
 } TREENODE;
 
 /*------------------------------------------------

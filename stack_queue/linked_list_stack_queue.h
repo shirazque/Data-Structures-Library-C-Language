@@ -23,7 +23,7 @@ Members:
 -------------------------------------------------*/
 typedef struct node {
     TREENODE *treenode;
-    NODE *next;
+    struct node *next;
 } NODE;
 
                                             /* ------------ STACK ------------ */

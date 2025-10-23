@@ -19,6 +19,8 @@ PRIORITYQUEUE *pq_init() {
         new_pq->rear = NULL;
         new_pq->length = 0;
     }
+
+    return new_pq;
 }
 
 /*------------------------------------------------
@@ -35,13 +37,12 @@ Returns:
 PQNODE* new_node(PRIORITYQUEUE *pq, int data) {
     PQNODE *node = malloc(sizeof(PQNODE)); // Allocate space for new node and return it as a pointer to that space
 
-    if (pq){
-        // If pointer to PQ exists
-        if (node) {
-            // If the node was successfully allocated
-            node->value.value = data; // Copy the data
-        }
+    // If pointer to PQ exists
+    if (node) {
+        // If the node was successfully allocated
+        node->value.value = data; // Copy the data
     }
+
 
     return node;
 }
@@ -103,6 +104,7 @@ DATA pq_dequeue(PRIORITYQUEUE *pq) {
             dequeued = pq->front->value;
             free(temp);
             pq->front = pq->front->next;
+            pq->length = pq->length - 1;
         }
     }
 

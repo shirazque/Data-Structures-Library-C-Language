@@ -28,7 +28,7 @@ Members:
 -------------------------------------------------*/
 typedef struct pq_node{
     DATA value;
-    PQNODE *next;
+    struct pq_node *next;
 } PQNODE;
 
 /*------------------------------------------------

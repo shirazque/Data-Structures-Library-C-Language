@@ -130,7 +130,7 @@ void test_linked_list_priority_queue() {
 
 // W.I.P
 void test_singly_linked_list() {
-    printf("--------------------- Testing for Singly Linked List ---------------------");
+    printf("--------------------- Testing for Linked List ---------------------");
 }
 
 // W.I.P

@@ -36,8 +36,8 @@ typedef struct avl_node {
     USER user;
     int height;
     int balance_factor;
-    AVLNODE *left;
-    AVLNODE *right;
+    struct avl_node *left;
+    struct avl_node *right;
 } AVLNODE;
 
 /*------------------------------------------------
