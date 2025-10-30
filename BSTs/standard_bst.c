@@ -29,8 +29,8 @@ TREENODE* bstnode_init(FOOD food) {
     if (new_node) {
         // If node was successfully allocated, set the members
         new_node->food = food;
-        new_node->color = NON_RBT;
-        new_node->height = -1; // Since this is a non-balancing Binary Search Tree, all nodes have a height of -1
+        new_node->color = NON_RBT; // Since this is a non-balancing Binary Search Tree 
+        new_node->height = -1;     // Since this is a non-balancing Binary Search Tree
         new_node->left = NULL;
         new_node->height = NULL;
     }
@@ -73,9 +73,8 @@ int bst_insert(BST *nbt, int calories, char food[85], BOOLEAN is_veg, int origin
                     else {
                         // Data is already in the BST - Stop loop
                         already_in_tree = 1;
-                        free(new_node); // Free the node. Food Struct does not need to be freed as it is stored
-                                        // in the Stack region. This is automatically freed at the end of the
-                                        // function's life.
+                        free(new_node); // Free the node. 
+                        food_free(&new_food);
                     }
                 }
 
@@ -189,14 +188,13 @@ TREENODE* find_repl_node(TREENODE *node) {
         current = current->left;
     }
 
+    // If the Replacement Node has a Right Child
     if (current->right) {
-        // Right Child Node of Replacement Node goes in Replacement Node place
         parent->left = current->right;
     }
 
     else {
-        // Outside of this function, current (repl) will be taking place of node, with node's pointers. 
-        node->right = current->right; // Update the right child of node to point to the right child of the replacement node
+        node->right = current->right;
     }
 
     return current;

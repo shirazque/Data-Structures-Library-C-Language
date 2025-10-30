@@ -13,12 +13,16 @@ Description:
 #include <auxiliary/tree_common.h>
 #include <auxiliary/aux_stack_queue.h>
 
-// Constants defining Food Origins
+/*--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+                                                                        Constants
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
 char ORIGINS[19][12] = {"Canadian", "Chinese", "Indian", "Ethiopian", 
     "Mexican", "Greek", "Japanese", "Italian", "American", "Scottish", "New Zealand", "English"};
 
-
-                        /*    ----------    Food Structure Functions   ----------    */
+/*--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+                                                            Functions Operating on FOOD Structures 
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 FOOD food_init(int calories, char food[85], BOOLEAN is_veg, int origin) {
     FOOD new_food = { 0 }; // Create a new FOOD Structure
@@ -26,6 +30,7 @@ FOOD food_init(int calories, char food[85], BOOLEAN is_veg, int origin) {
     // Set the members of the newly initialized Food
     new_food.calories = calories; 
     strcpy(new_food.food, food); // Copies data. strcpy(destination, source)
+    new_food.is_veg = is_veg; // Copies the boolean value
     strcpy(new_food.origin, ORIGINS[origin]); // Copies the contents of the food origin
     
     return new_food;
@@ -52,8 +57,13 @@ void food_array_iter(FOOD *array_foods_bst, int max_length) {
     }
 }
 
+void food_free(FOOD *me) {
+    free(me);
+}
 
-                        /*    ----------    BST Traversal Functions    ----------    */
+/*--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+                                                                BST Traversal Functions
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 void preorder_traversal(TREENODE *root, FOOD *array_preorder) {
     int i = 0;

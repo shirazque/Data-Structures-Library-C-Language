@@ -11,11 +11,17 @@ Description:
 #ifndef TREE_COMMON_H
 #define TREE_COMMON_H
 
-typedef enum {True = 1, False = 0} BOOLEAN; // Enumerator defining True/False Boolean
-typedef enum {RED, BLACK, NON_RBT} RBT_NODE_TYPE; // Enumerator defining Red-Black Tree Node Type Options
+/*--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+                                                                        Constants
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
-                        /*    ----------    Food Structure    ----------    */
 extern char ORIGINS[19][12];
+typedef enum {TRUE = 1, FALSE = 0} BOOLEAN; // Enumerator defining a set of Boolean Constants
+typedef enum {RED, BLACK, NON_RBT} RBT_NODE_TYPE; // Enumerator defining Red-Black Tree Node Type 
+
+/*--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+                                                                FOOD & TREENODE Structures
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 /*-------------------------------------
 Structure: Food
@@ -32,6 +38,29 @@ typedef struct food {
     BOOLEAN is_veg;
     int calories;
 } FOOD;
+
+/*-------------------------------------
+Structure: Tree Node for BSTs
+Members:
+    1. Pointer to the left Tree Node
+    2. Pointer to the right Tree Node
+    3. Food Structure
+    4. Color of the Node (only applies
+       if the Tree is an RBT)
+    5. Height of the Node (only applies
+       if the Tree is an AVL or RBT)
+-------------------------------------*/
+typedef struct treenode {
+    struct treenode *left;
+    struct treenode *right;
+    RBT_NODE_TYPE color;                      // Only if the Tree is an RBT 
+    int height;                               // Only if the Tree is an RBT or an AVL Tree
+    FOOD food;
+} TREENODE;
+
+/*--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+                                                            Functions Operating on FOOD Structures 
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 /*-------------------------------------
 Function:
@@ -77,26 +106,19 @@ Returns:
 -------------------------------------*/
 void food_array_iter(FOOD *array_foods_bst, int max_length);
 
-                /*    ----------    Tree Node & BST Traversal Functions    ----------    */
-
 /*-------------------------------------
-Structure: Tree Node for BSTs
-Members:
-    1. Pointer to the left Tree Node
-    2. Pointer to the right Tree Node
-    3. Food Structure
-    4. Color of the Node (only applies
-       if the Tree is an RBT)
-    5. Height of the Node (only applies
-       if the Tree is an AVL or RBT)
+Function:
+    Frees the Food Object
+Parameters:
+    1. Pointer of food structure
+Returns:
+    N/A
 -------------------------------------*/
-typedef struct treenode {
-    struct treenode *left;
-    struct treenode *right;
-    RBT_NODE_TYPE color;                      // Only if the Tree is an RBT 
-    int height;                               // Only if the Tree is an RBT or an AVL Tree
-    FOOD food;
-} TREENODE;
+void food_free(FOOD *me);
+
+/*--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+                                                                BST Traversal Functions
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 /*-------------------------------------
 Function:

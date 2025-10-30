@@ -23,12 +23,51 @@ typedef struct bst {
     int length;
 } BST;
 
+/*-------------------------------------
+Function:
+    Initializes a new BST and returns
+    a pointer to it
+Parameters:
+    N/A
+Returns:
+    Pointer to BST
+-------------------------------------*/
 BST* bst_init();
 
-int bst_insert(int calories, char food[85], BOOLEAN is_veg, int origin);
+/*-------------------------------------
+Function:
+    Inserts a new Food Instance into a
+    BST
+Parameters:
+    1. Node being deleted
+Returns:
+    Replacement Node
+-------------------------------------*/
+int bst_insert(BST *nbt, int calories, char food[85], BOOLEAN is_veg, int origin);
 
-FOOD* bst_remove(char key_food[85]);
+/*-------------------------------------
+Function:
+    Removes a Node containing Food
+    Instance with name matching Key
+    from a BST
+Parameters:
+    1. Pointer to BST
+    2. Key (Food Name)
+Returns:
+    Pointer to Food Instance with
+    food name matching key, NULL
+    otherwise
+-------------------------------------*/
+FOOD* bst_remove(BST *nbt, char key_food[85]);
 
+/*-------------------------------------
+Function:
+    Frees and Destroys a BST
+Parameters:
+    1. Pointer to BST
+Returns:
+    1 if Wipped, 0 otherwise
+-------------------------------------*/
 int wipe_bst();
 
 #endif

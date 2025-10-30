@@ -1,35 +1,82 @@
 Note:
     This folder contains a collection of Binary Search Trees, most of which are self-balancing to
     maintain at most O(log(n)) time/space efficiencies. Each node contains a structure of type 
-    Food, representing a dish.    
+    Food, representing a dish.
+
+    Information regarding BST API and Files:
+        1. tree_common (C/Header):
+            (a) Constants - These are a set of variables and enumerator sets that are
+            NOT to be changed anywhere else in this project under any circumstances.
+            (b) FOOD Structure - A data type to be stored in the general-purpose Binary
+            Search Tree node. It contains the following members:
+                i. The Food Name (a string with an 85-character capacity).
+                - The food with the largest name contains more than 80 characters.
+                ii. The Food Origin (entered as an integer representing an index 'I',
+                entered by the user, stored as a string element of index 'I' displaying
+                the country of origin of the food from the ORIGINS array).
+                iii. A boolean for whether the food is vegetarian or not.
+                iv. The number of calories in the food.
+            (c) TREENODE Structure - Defines a general-purpose Binary Search Tree node.
+            Each BST will consist of these nodes, connected to other nodes via pointers.
+            Since the tree node is general-purpose, it is accepted by all BSTs—self-balancing
+            or not. This data type contains the following members:
+                i. Pointer to a left tree node child.
+                ii. Pointer to a right tree node child.
+                iii. Color of the tree node (only applies if the BST is of type RBT).
+                iv. Height of the tree node (only applies if the BST is of type RBT or AVL).
+            (d) Traversal Functions - Since Binary Search Trees have multiple paths from the
+            root to each leaf node, traversal orders are dynamic. Since every BST uses the
+            same general-purpose node, these functions accept the exact same tree node type,
+            hence providing compatibility for all Binary Search Trees in this API, self-balancing
+            or not. Each function stores each FOOD instance from each node with its corresponding
+            traversal order in an array. The following is a list of all traversal functions:
+                i. Preorder Traversal: Recursive algorithm. Process the current node, then
+                recursively traverse the left and right subtrees.
+                ii. Inorder Traversal: Recursive algorithm. Recursively traverse the left subtree,
+                process the current node, then recursively traverse the right subtree.
+                iii. Postorder Traversal: Recursive algorithm. Recursively traverse the left and
+                right subtrees, then process the current node.
+                iv. Breadth-First Traversal: Iterative algorithm using an auxiliary queue data
+                structure. Processes each node level by level.
+                v. Depth-First Traversal: Iterative algorithm using an auxiliary stack data
+                structure. Processes each node depth-first, then wide. Simulated recursion.
+        2. aux_stack_queue (C/Header): An auxiliary stack and queue data structure used for the
+        above breadth- and depth-first traversal functions.
+        3. BST Files:
+            (a) standard_bst (C/Header): A non-balancing Binary Search Tree data structure.
+            (b) adelson_velsky_landis (C/Header): A self-balancing Binary Search Tree data structure.
+            Balances via rotations to keep each node's balance factor within the range [-1, 1].
+                (NOTE) balance factor = left child height - right child height
+            (c) red_black_tree (C/Header): A self-balancing Binary Search Tree data structure.
+            Balances via rotations to maintain a specific red-black color pattern in each path.
+        4. Extra Notes:
+            (a) Memory efficiency in this API for tree nodes is a slight drawback, since non-balancing
+            BSTs will have each node with heights declared as '-1' and color type as NON_RBT. This is
+            a design choice to allow traversal functions to have shared compatibility for every BST.
+            (b) For most functions, we pass and return pointers to allow for memory efficiency. In C,
+            passing a full data type copies it and all its members, which is costly in terms of space.
+            Passing a pointer essentially passes only the address of the memory cell containing the data
+            type, allowing for proper modification of the original instance.
 
     The following is a conceptual adjacency list of all BST file dependencies.
     ______________________________________________________________________________
+    
     BSTs:
 
-    standard_bst.c          | -> standard_bst.h          -> tree_common.h
-    adelson_velsky_landis.c | -> adelson_velsky_landis.h -> tree_common.h              
-    red_black_tree.c        | -> red_black_tree.h        -> tree_common.h
-    tree_common.c           | -> aux_stack_queue.h       -> tree_common.h
-    aux_stack_queue.c       | -> aux_stack_queue.h       -> tree_common.h            
-    ______________________________________________________________________________
+    standard_bst.c              |  ->     standard_bst.h
+    standard_bst.c              |  ->     tree_common.h
+    standard_bst.h              |  ->     tree_common.h
 
-    Description of each file (C/Header):
-        1. aux_stack_queue: Auxiliary Stack and Queue
-        data structure for Binary Search Tree breadth- 
-        and depth-first traversals.
-        2. tree_common:
-            a. Contains the Food structure, which will
-            be used as a data type for all BST nodes.
-            b. Contains a common node, which will be
-            used for all BSTs.
-            c. Contains traversal functions accepting
-            a BST node (i.e., the root of each tree),
-            compatible with all BSTs. Adds the contents
-            of the BST into an array.
-        3. standard_bst: Non-self-balancing Binary Search
-        Tree.
-        4. adelson_velsky_landis: Self-balancing Binary
-        Search Tree. 
-        5. red_black_tree: Self-balancing Binary Search
-        Tree.
+    adelson_velsky_landis.c     |  ->     adelson_velsky_landis.h
+    adelson_velsky_landis.c     |  ->     tree_common.h
+    adelson_velsky_landis.h     |  ->     tree_common.h
+
+    red_black_tree.c            |  ->     red_black_tree.h
+    red_black_tree.c            |  ->     tree_common.h
+    red_black_tree.h            |  ->     tree_common.h
+
+    tree_common.c               |  ->     tree_common.h
+    tree_common.c               |  ->     aux_stack_queue.h
+    aux_stack_queue.c           |  ->     aux_stack_queue.h
+    aux_stack_queue.c           |  ->     tree_common.h
+    ______________________________________________________________________________
