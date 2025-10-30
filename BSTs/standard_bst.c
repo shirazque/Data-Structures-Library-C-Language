@@ -8,8 +8,9 @@ Description:
 
 #include <stdio.h>  // Includes Standard Input/Output Header
 #include <stdlib.h> // Includes Standard Library Header
-#include <standard_bst.h>
-#include <auxiliary/tree_common.h>
+#include <string.h> // Includes String Header
+#include "standard_bst.h"
+#include "tree_common.h"
 
 BST* bst_init() {
     BST *new_tree = malloc(sizeof(BST));
@@ -18,7 +19,7 @@ BST* bst_init() {
         // If tree was successfully allocated
         new_tree->root = NULL;
         new_tree->length = 0;
-    }
+    } 
 
     return new_tree;
 }
@@ -32,70 +33,108 @@ TREENODE* bstnode_init(FOOD food) {
         new_node->color = NON_RBT; // Since this is a non-balancing Binary Search Tree 
         new_node->height = -1;     // Since this is a non-balancing Binary Search Tree
         new_node->left = NULL;
-        new_node->height = NULL;
+        new_node->right = NULL;
+        new_node->height = -1;
     }
 
     return new_node;
 }
 
-int bst_insert(BST *nbt, int calories, char food[85], BOOLEAN is_veg, int origin) { 
+int bst_insert(BST *nbt, FOOD *new_food) { 
     int inserted = 0;
 
     if (nbt) {
         // If Tree exists
-        FOOD new_food = food_init(calories, food, is_veg, origin); // Initialize a Food Structure
-        TREENODE *new_node = bstnode_init(new_food); // Initialize a new BST Node
+        if (new_food) { 
+            TREENODE *new_node = bstnode_init(*new_food); // Initialize a new BST Node
 
-        if (new_node) {
-            // If BST node was successfully allocated
-            if (nbt->root) {
-                // If there already exists a Root in the Tree
-                TREENODE **current = &(nbt->root); // Double Pointer - Stores address of Root Pointer
-                int already_in_tree = 0;
+            if (new_node) {
+                // If BST node was successfully allocated
+                if (nbt->root) {
+                    // If there already exists a Root in the Tree
+                    TREENODE **current = &(nbt->root); // Double Pointer - Stores address of Root Pointer
+                    int already_in_tree = 0;
 
-                while (*current && !already_in_tree) {
-                    // Traverse the BST to find the proper place of insertion
-                    int compare_foods = food_compare(&new_food, &((*current)->food)); // Compares Food Type Names
+                    while (*current && !already_in_tree) {
+                        // Traverse the BST to find the proper place of insertion
+                        int compare_foods = food_compare(new_food, &((*current)->food)); // Compares Food Type Names
 
-                    if (compare_foods) {
-                        // If the data is not yet present in the BST
-                        if (compare_foods < 0) {
-                            // If the new node is lexicographically smaller than the current node
-                            current = &((*current)->left); // Iteratively traverse to the left subtree
+                        if (compare_foods) {
+                            // If the data is not yet present in the BST
+                            if (compare_foods < 0) {
+                                // If the new node is lexicographically smaller than the current node
+                                current = &((*current)->left); // Iteratively traverse to the left subtree
+                            }
+
+                            else {
+                                // If the new node is lexicographically greater than the current node 
+                                current = &((*current)->right); // Iteratively traverse to the right subtree
+                            }
                         }
 
                         else {
-                            // If the new node is lexicographically greater than the current node 
-                            current = &((*current)->right); // Iteratively traverse to the right subtree
+                            // Data is already in the BST - Stop loop
+                            already_in_tree = 1;
+                            free(new_node); // Free the node. 
+                            free(new_food);
                         }
                     }
 
-                    else {
-                        // Data is already in the BST - Stop loop
-                        already_in_tree = 1;
-                        free(new_node); // Free the node. 
-                        food_free(&new_food);
+                    // Insertion place found
+                    if (!already_in_tree) {
+                        (*current) = new_node; // Node goes in place of the current address, which WAS holding a NULL memory cell.
+                                            // Memory cell holds Node
                     }
                 }
 
-                // Insertion place found
-                if (!already_in_tree) {
-                    (*current) = new_node; // Node goes in place of the current address, which WAS holding a NULL memory cell.
-                                        // Memory cell holds Node
+                else {
+                    // Tree is empty - Newly allocated node becomes the Root
+                    nbt->root = new_node;
                 }
-            }
 
-            else {
-                // Tree is empty - Newly allocated node becomes the Root
-                nbt->root = new_node;
+                nbt->length = nbt->length + 1;
+                inserted = 1;
             }
-
-            nbt->length = nbt->length + 1;
-            inserted = 1;
         }
     }
 
     return inserted;
+}
+
+/*-------------------------------------
+Auxiliary Function:
+    Finds the smallest Node in the Right
+    Subtree as a replacement Tree Node.
+    Takes care of the case for if the
+    replacement Tree Node contains a
+    Right Child Node
+Parameters:
+    1. Node being deleted
+Returns:
+    Replacement Node
+-------------------------------------*/
+TREENODE* find_repl_node(TREENODE *node) {
+    TREENODE *parent = NULL;
+    TREENODE *current = node->right;
+
+    while (current->left) {
+        // Find the left most node
+        parent = current;
+        current = current->left;
+    }
+
+    // Pointer Manipulation if Replacement Node has a right child
+    if (parent) {
+        // If replacement node has right child
+        parent->left = current->right;        
+    } else {
+        // If the replacement node is directly to the right of deletion node (while loop didn't run)
+        node->right = current->right;
+    }
+
+    current->right = NULL;
+    
+    return current;
 }
 
 FOOD bst_remove(BST *nbt, char key_food[85]) {
@@ -162,42 +201,6 @@ FOOD bst_remove(BST *nbt, char key_food[85]) {
     return food_data_removed;
 }
 
-/*-------------------------------------
-Auxiliary Function:
-    Finds the smallest Node in the Right
-    Subtree as a replacement Tree Node.
-    Takes care of the case for if the
-    replacement Tree Node contains a
-    Right Child Node
-Parameters:
-    1. Node being deleted
-Returns:
-    Replacement Node
--------------------------------------*/
-TREENODE* find_repl_node(TREENODE *node) {
-    TREENODE *parent = NULL;
-    TREENODE *current = node->right;
-
-    while (current->left) {
-        // Find the left most node
-        parent = current;
-        current = current->left;
-    }
-
-    // Pointer Manipulation if Replacement Node has a right child
-    if (parent) {
-        // If replacement node has right child
-        parent->left = current->right;        
-    } else {
-        // If the replacement node is directly to the right of deletion node (while loop didn't run)
-        node->right = current->right;
-    }
-
-    current->right = NULL;
-    
-    return current;
-}
-
 int bst_length(BST *nbt) {
     int length = 0;
 
@@ -208,19 +211,14 @@ int bst_length(BST *nbt) {
     return length;
 }
 
-int wipe_bst(BST *nbt) {
-    int wiped = 0;
+TREENODE *give_root(BST *nbt) {
+    TREENODE *root;
 
-    if (nbt) {
-        if (nbt->root) {
-            wipe_bst_aux(nbt->root);
-        }
-
-        free(nbt);
-        wiped = 1;
+    if (nbt->root) {
+        root = nbt->root;
     }
 
-    return wiped;
+    return root;
 }
 
 /*-------------------------------------
@@ -238,3 +236,19 @@ void wipe_bst_aux(TREENODE *node) {
         free(node);
     }
 }
+
+int wipe_bst(BST *nbt) {
+    int wiped = 0;
+
+    if (nbt) {
+        if (nbt->root) {
+            wipe_bst_aux(nbt->root);
+        }
+
+        free(nbt);
+        wiped = 1;
+    }
+
+    return wiped;
+}
+

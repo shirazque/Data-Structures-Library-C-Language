@@ -10,8 +10,9 @@ Description:
 
 #include <stdio.h>  // Includes Standard Input/Output Header
 #include <stdlib.h> // Includes Standard Library Header
-#include <auxiliary/tree_common.h>
-#include <auxiliary/aux_stack_queue.h>
+#include <string.h> // Includes String Header
+#include "tree_common.h"
+#include "aux_stack_queue.h"
 
 /*--------------------------------------------------------------------------------------------------------------------------------------------------------------------
                                                                         Constants
@@ -24,14 +25,16 @@ char ORIGINS[19][12] = {"Canadian", "Chinese", "Indian", "Ethiopian",
                                                             Functions Operating on FOOD Structures 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
-FOOD food_init(int calories, char food[85], BOOLEAN is_veg, int origin) {
-    FOOD new_food = { 0 }; // Create a new FOOD Structure
+FOOD *food_init(int calories, const char *food, BOOLEAN is_veg, int origin) {
+    FOOD *new_food = malloc(sizeof(FOOD));
     
     // Set the members of the newly initialized Food
-    new_food.calories = calories; 
-    strcpy(new_food.food, food); // Copies data. strcpy(destination, source)
-    new_food.is_veg = is_veg; // Copies the boolean value
-    strcpy(new_food.origin, ORIGINS[origin]); // Copies the contents of the food origin
+    if (new_food) {
+        new_food->calories = calories; 
+        strcpy(new_food->food, food); // Copies data. strcpy(destination, source)
+        new_food->is_veg = is_veg; // Copies the boolean value
+        strcpy(new_food->origin, ORIGINS[origin]); // Copies the contents of the food origin
+    }
     
     return new_food;
 }
@@ -40,7 +43,7 @@ int food_compare(FOOD *me, FOOD *other) {
     return strcmp(me->food, other->food);
 }
 
-void food_array_iter(FOOD *array_foods_bst, int max_length) {
+void food_arr_iter(FOOD *array_foods_bst, int max_length) {
     if (array_foods_bst) {
         // If the array exists
         int i = 0;
@@ -65,11 +68,6 @@ void food_free(FOOD *me) {
                                                                 BST Traversal Functions
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
-void preorder_traversal(TREENODE *root, FOOD *array_preorder) {
-    int i = 0;
-    preorder_aux(root, array_preorder, &i);
-}
-
 /*-------------------------------------
 Auxiliary Function:
     Adds the contents of the Tree to the
@@ -92,9 +90,9 @@ void preorder_aux(TREENODE *node, FOOD *array_preorder, int *i) {
     }
 }
 
-void inorder_traversal(TREENODE *root, FOOD *array_inorder) {
+void preorder_traversal(TREENODE *root, FOOD *array_preorder) {
     int i = 0;
-    inorder_aux(root, array_inorder, &i);
+    preorder_aux(root, array_preorder, &i);
 }
 
 /*-------------------------------------
@@ -121,9 +119,9 @@ void inorder_aux(TREENODE *node, FOOD *array_inorder, int *i) {
     }
 }
 
-void postorder_traversal(TREENODE *root, FOOD *array_postorder) {
+void inorder_traversal(TREENODE *root, FOOD *array_inorder) {
     int i = 0;
-    postorder_aux(root, array_postorder, &i);
+    inorder_aux(root, array_inorder, &i);
 }
 
 /*-------------------------------------
@@ -149,11 +147,16 @@ void postorder_aux(TREENODE *node, FOOD *array_postorder, int *i) {
     }
 }
 
+void postorder_traversal(TREENODE *root, FOOD *array_postorder) {
+    int i = 0;
+    postorder_aux(root, array_postorder, &i);
+}
+
 void bf_traversal(TREENODE *root, FOOD *array_breadth_first) {
     if (root) {
         // If there exists a Root Node
         int i = 0;
-        QUEUE *new_queue = init(); // Initialize a Queue
+        QUEUE *new_queue = queue_init(); // Initialize a Queue
         queue_enqueue(new_queue, root); // Enqueue the root
 
         while (queue_length(new_queue) > 0) {

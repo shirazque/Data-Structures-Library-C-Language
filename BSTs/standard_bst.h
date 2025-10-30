@@ -8,7 +8,7 @@ Description:
 
 #include <stdio.h>  // Includes Standard Input/Output Header
 #include <stdlib.h> // Includes Standard Library Header
-#include <auxiliary/tree_common.h>
+#include "tree_common.h"
 #ifndef STANDARD_BST_H
 #define STANDARD_BST_H
 
@@ -36,14 +36,15 @@ BST* bst_init();
 
 /*-------------------------------------
 Function:
-    Inserts a new Food Instance into a
+    Inserts a Food into a
     BST
 Parameters:
     1. Node being deleted
+    2. Pointer to new_food
 Returns:
     Replacement Node
 -------------------------------------*/
-int bst_insert(BST *nbt, int calories, char food[85], BOOLEAN is_veg, int origin);
+int bst_insert(BST *nbt, FOOD *new_food);
 
 /*-------------------------------------
 Function:
@@ -69,6 +70,16 @@ Returns:
     Length of BST
 -------------------------------------*/
 int bst_length(BST *nbt);
+
+/*-------------------------------------
+Function:
+    Gives the root of the BST
+Parameters:
+    1. Pointer to BST
+Returns:
+    Root of the Tree
+-------------------------------------*/
+TREENODE *give_root(BST *nbt);
 
 /*-------------------------------------
 Function:

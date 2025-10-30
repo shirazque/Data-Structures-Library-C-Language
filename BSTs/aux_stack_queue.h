@@ -10,7 +10,7 @@ Description:
 
 #include <stdio.h>  // Includes Standard Input/Output Header
 #include <stdlib.h> // Includes Standard Library Header
-
+#include "tree_common.h"
                         /*    ----------    Array-based Stack    ----------    */
 
 /*-------------------------------------
