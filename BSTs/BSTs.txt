@@ -1,0 +1,35 @@
+Note:
+    This folder contains a collection of Binary Search Trees, most of which are self-balancing to
+    maintain at most O(log(n)) time/space efficiencies. Each node contains a structure of type 
+    Food, representing a dish.    
+
+    The following is a conceptual adjacency list of all BST file dependencies.
+    ______________________________________________________________________________
+    BSTs:
+
+    standard_bst.c          | -> standard_bst.h          -> tree_common.h
+    adelson_velsky_landis.c | -> adelson_velsky_landis.h -> tree_common.h              
+    red_black_tree.c        | -> red_black_tree.h        -> tree_common.h
+    tree_common.c           | -> aux_stack_queue.h       -> tree_common.h
+    aux_stack_queue.c       | -> aux_stack_queue.h       -> tree_common.h            
+    ______________________________________________________________________________
+
+    Description of each file (C/Header):
+        1. aux_stack_queue: Auxiliary Stack and Queue
+        data structure for Binary Search Tree breadth- 
+        and depth-first traversals.
+        2. tree_common:
+            a. Contains the Food structure, which will
+            be used as a data type for all BST nodes.
+            b. Contains a common node, which will be
+            used for all BSTs.
+            c. Contains traversal functions accepting
+            a BST node (i.e., the root of each tree),
+            compatible with all BSTs. Adds the contents
+            of the BST into an array.
+        3. standard_bst: Non-self-balancing Binary Search
+        Tree.
+        4. adelson_velsky_landis: Self-balancing Binary
+        Search Tree. 
+        5. red_black_tree: Self-balancing Binary Search
+        Tree.
