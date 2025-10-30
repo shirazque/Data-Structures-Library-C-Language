@@ -95,8 +95,8 @@ int food_compare(FOOD *me, FOOD *other);
 /*-------------------------------------
 Function:
     Traverses and prints the contents of
-    an Array with Pointers to FOOD from
-    the BST
+    an Array of Pointers to FOOD objects
+    from the BST
 Parameters:
     1. Pointer to array of FOOD structures
     2. Maximum size of Array

@@ -3,7 +3,7 @@ Note:
     maintain at most O(log(n)) time/space efficiencies. Each node contains a structure of type 
     Food, representing a dish.
 
-    Information regarding BST API and Files:
+    Information regarding BST (API and Files):
         1. tree_common (C/Header):
             (a) Constants - These are a set of variables and enumerator sets that are
             NOT to be changed anywhere else in this project under any circumstances.
@@ -42,6 +42,16 @@ Note:
                 structure. Processes each node depth-first, then wide. Simulated recursion.
         2. aux_stack_queue (C/Header): An auxiliary stack and queue data structure used for the
         above breadth- and depth-first traversal functions.
+            (a) Array-based Stack - Much more space-efficient than a Linked List-based Stack,
+            as the instantiation of Linked List Nodes is costly in space efficiency. Pushing
+            and popping are time-efficient in an Array-based Stack as we are simply inserting/
+            removing from the END of the Array. 
+            (b) Linked List-based Queue - Much more time-efficient than an Array-based Queue,
+            as enqueue/dequeue operations merely require pointer manipulation from the front
+            or rear of the Queue. An Array-based Queue requires a shift in all data elements
+            in the Array when enqueuing/dequeuing, resulting in linear time complexity. More
+            costly in space efficiency, but still within the realm of constant space
+            complexity.
         3. BST Files:
             (a) standard_bst (C/Header): A non-balancing Binary Search Tree data structure.
             (b) adelson_velsky_landis (C/Header): A self-balancing Binary Search Tree data structure.
@@ -53,12 +63,13 @@ Note:
             (a) Memory efficiency in this API for tree nodes is a slight drawback, since non-balancing
             BSTs will have each node with heights declared as '-1' and color type as NON_RBT. This is
             a design choice to allow traversal functions to have shared compatibility for every BST.
-            (b) For most functions, we pass and return pointers to allow for memory efficiency. In C,
-            passing a full data type copies it and all its members, which is costly in terms of space.
-            Passing a pointer essentially passes only the address of the memory cell containing the data
-            type, allowing for proper modification of the original instance.
+            (b) For most Data Structure functions, we pass and return pointers to allow for memory
+            efficiency. In C, passing a full data type copies it and all its members, which is costly in
+            terms of space. Passing a pointer essentially passes only the address of the memory cell
+            containing the data type, allowing for proper modification of the original instance.
 
-    The following is a conceptual adjacency list of all BST file dependencies.
+    The following is a conceptual adjacency list of all BST file dependencies for better visualization
+    of how each file is interdependent:
     ______________________________________________________________________________
     
     BSTs:

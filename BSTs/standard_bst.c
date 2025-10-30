@@ -98,8 +98,8 @@ int bst_insert(BST *nbt, int calories, char food[85], BOOLEAN is_veg, int origin
     return inserted;
 }
 
-FOOD* bst_remove(BST *nbt, char key_food[85]) {
-    FOOD *food_data_removed = NULL;
+FOOD bst_remove(BST *nbt, char key_food[85]) {
+    FOOD food_data_removed = { 0 }; // Newly initialized food struct. Returns as all members 0 if removal was unsuccessful
 
     if (nbt) {
         // If the tree exists
@@ -123,39 +123,35 @@ FOOD* bst_remove(BST *nbt, char key_food[85]) {
                 else {
                     // Found the Node of deletion
                     found = 1; // Set found to 1 in order to stop the loop
-                    food_data_removed = &((*current)->food);
                     TREENODE *temp = *current;
+                    food_data_removed = ((*current)->food); // Copy the contents on the newly initialized food struct above
+                    
+                    if (!((*current)->left) && !((*current)->right)) {
+                        // Case #1: Node has no children
+                        (*current) = NULL; 
+                    }
 
-                    // Deletion process here
-                    if (((*current)->left) && ((*current)->right)) {
-                        // Node of deletion has two children
-                        TREENODE *replacement_node = find_repl_node(*current); // Find replacement node
-                        
-                        // Update Pointers
-                        replacement_node->left = (*current)->left;
-                        replacement_node->right = (*current)->right;
+                    else if ((*current)->left && !((*current)->right)) {
+                        // Case #2: Node has only one left child
+                        (*current) = (*current)->left; // Left child is the Replacement Node
+                    }
 
-                        // Set Replacement Node
-                        (*current) = replacement_node;
+                    else if (!(*current)->left && ((*current)->right)) {
+                        // Case #3: Node has only one left child
+                        (*current) = (*current)->right; // Right child is the Replacement Node
                     }
 
                     else {
-                        if ((*current)->left) {
-                            // Node of deletion has one left child
-                            (*current) = (*current)->left; // Set Replacement Node
-                        }
+                        // Case #4: Node has two children
+                        TREENODE *replacement = find_repl_node(*current); // Retrieve Replacement Node (Smallest Node in the Right Subtree)
 
-                        else if ((*current)->right) {
-                            // Node of deletion has one right child
-                            (*current) = (*current)->right; // Set Replacement Node
-                        }
-
-                        else {
-                            // Node of deletion has no children
-                            (*current) = NULL;
-                        }
+                        // Pointer Manipulation
+                        replacement->left = (*current)->left;
+                        replacement->right = (*current)->right;
+                        (*current) = replacement;
+                        
                     }
-                    
+
                     free(temp); // Free the Node we're deleting
                     nbt->length = nbt->length - 1; // Decrement Count
                 }
@@ -188,14 +184,57 @@ TREENODE* find_repl_node(TREENODE *node) {
         current = current->left;
     }
 
-    // If the Replacement Node has a Right Child
-    if (current->right) {
-        parent->left = current->right;
-    }
-
-    else {
+    // Pointer Manipulation if Replacement Node has a right child
+    if (parent) {
+        // If replacement node has right child
+        parent->left = current->right;        
+    } else {
+        // If the replacement node is directly to the right of deletion node (while loop didn't run)
         node->right = current->right;
     }
 
+    current->right = NULL;
+    
     return current;
+}
+
+int bst_length(BST *nbt) {
+    int length = 0;
+
+    if (nbt) {
+        length = nbt->length;
+    }
+
+    return length;
+}
+
+int wipe_bst(BST *nbt) {
+    int wiped = 0;
+
+    if (nbt) {
+        if (nbt->root) {
+            wipe_bst_aux(nbt->root);
+        }
+
+        free(nbt);
+        wiped = 1;
+    }
+
+    return wiped;
+}
+
+/*-------------------------------------
+Auxiliary Function:
+    Frees all BST nodes in Postorder
+Parameters:
+    1. Pointer to current Tree Node
+Returns:
+    1 if Wipped, 0 otherwise
+-------------------------------------*/
+void wipe_bst_aux(TREENODE *node) {
+    if (node) {
+        wipe_bst_aux(node->left);
+        wipe_bst_aux(node->right);
+        free(node);
+    }
 }

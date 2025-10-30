@@ -54,11 +54,21 @@ Parameters:
     1. Pointer to BST
     2. Key (Food Name)
 Returns:
-    Pointer to Food Instance with
+    New Food Instance with
     food name matching key, NULL
     otherwise
 -------------------------------------*/
-FOOD* bst_remove(BST *nbt, char key_food[85]);
+FOOD bst_remove(BST *nbt, char key_food[85]);
+
+/*-------------------------------------
+Function:
+    Returns the length of the BST
+Parameters:
+    1. Pointer to BST
+Returns:
+    Length of BST
+-------------------------------------*/
+int bst_length(BST *nbt);
 
 /*-------------------------------------
 Function:
@@ -68,6 +78,6 @@ Parameters:
 Returns:
     1 if Wipped, 0 otherwise
 -------------------------------------*/
-int wipe_bst();
+int wipe_bst(BST *nbt);
 
 #endif
