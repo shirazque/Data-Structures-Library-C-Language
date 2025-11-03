@@ -11,6 +11,58 @@ Description:
 #include "standard_bst.h"
 #include "auxiliary/tree_common.h"
 
+/*-------------------------------------
+Auxiliary Function:
+    Finds the smallest Node in the Right
+    Subtree as a replacement Tree Node.
+    Takes care of the case for if the
+    replacement Tree Node contains a
+    Right Child Node
+Parameters:
+    1. Node being deleted
+Returns:
+    Replacement Node
+-------------------------------------*/
+TREENODE* find_repl_node(TREENODE *node) {
+    TREENODE *parent = NULL;
+    TREENODE *current = node->right;
+
+    while (current->left) {
+        // Find the left most node
+        parent = current;
+        current = current->left;
+    }
+
+    // Pointer Manipulation if Replacement Node has a right child
+    if (parent) {
+        // If replacement node has right child
+        parent->left = current->right;        
+    } else {
+        // If the replacement node is directly to the right of deletion node (while loop didn't run)
+        node->right = current->right;
+    }
+
+    current->right = NULL;
+    
+    return current;
+}
+
+/*-------------------------------------
+Auxiliary Function:
+    Frees all BST nodes in Postorder
+Parameters:
+    1. Pointer to current Tree Node
+Returns:
+    1 if Wipped, 0 otherwise
+-------------------------------------*/
+void wipe_bst_aux(TREENODE *node) {
+    if (node) {
+        wipe_bst_aux(node->left);
+        wipe_bst_aux(node->right);
+        free(node);
+    }
+}
+
 BST* bst_init() {
     BST *new_tree = malloc(sizeof(BST));
 
@@ -162,42 +214,6 @@ FOOD bst_remove(BST *nbt, char key_food[85]) {
     return food_data_removed;
 }
 
-/*-------------------------------------
-Auxiliary Function:
-    Finds the smallest Node in the Right
-    Subtree as a replacement Tree Node.
-    Takes care of the case for if the
-    replacement Tree Node contains a
-    Right Child Node
-Parameters:
-    1. Node being deleted
-Returns:
-    Replacement Node
--------------------------------------*/
-TREENODE* find_repl_node(TREENODE *node) {
-    TREENODE *parent = NULL;
-    TREENODE *current = node->right;
-
-    while (current->left) {
-        // Find the left most node
-        parent = current;
-        current = current->left;
-    }
-
-    // Pointer Manipulation if Replacement Node has a right child
-    if (parent) {
-        // If replacement node has right child
-        parent->left = current->right;        
-    } else {
-        // If the replacement node is directly to the right of deletion node (while loop didn't run)
-        node->right = current->right;
-    }
-
-    current->right = NULL;
-    
-    return current;
-}
-
 int bst_length(BST *nbt) {
     int length = 0;
 
@@ -223,18 +239,3 @@ int wipe_bst(BST *nbt) {
     return wiped;
 }
 
-/*-------------------------------------
-Auxiliary Function:
-    Frees all BST nodes in Postorder
-Parameters:
-    1. Pointer to current Tree Node
-Returns:
-    1 if Wipped, 0 otherwise
--------------------------------------*/
-void wipe_bst_aux(TREENODE *node) {
-    if (node) {
-        wipe_bst_aux(node->left);
-        wipe_bst_aux(node->right);
-        free(node);
-    }
-}

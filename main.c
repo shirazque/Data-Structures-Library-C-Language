@@ -44,5 +44,6 @@ void test_bst() {
 }
 
 int main() {
+    test_bst();
     return 0;
 }

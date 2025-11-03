@@ -63,11 +63,6 @@ void food_free(FOOD *me) {
                                                                 BST Traversal Functions
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
-void preorder_traversal(TREENODE *root, FOOD *array_preorder) {
-    int i = 0;
-    preorder_aux(root, array_preorder, &i);
-}
-
 /*-------------------------------------
 Auxiliary Function:
     Adds the contents of the Tree to the
@@ -88,11 +83,6 @@ void preorder_aux(TREENODE *node, FOOD *array_preorder, int *i) {
         preorder_aux(node->left, array_preorder, i); // Recursively traverse to the left Subtree
         preorder_aux(node->right, array_preorder, i); // Recursively traverse to the right Subtree
     }
-}
-
-void inorder_traversal(TREENODE *root, FOOD *array_inorder) {
-    int i = 0;
-    inorder_aux(root, array_inorder, &i);
 }
 
 /*-------------------------------------
@@ -119,11 +109,6 @@ void inorder_aux(TREENODE *node, FOOD *array_inorder, int *i) {
     }
 }
 
-void postorder_traversal(TREENODE *root, FOOD *array_postorder) {
-    int i = 0;
-    postorder_aux(root, array_postorder, &i);
-}
-
 /*-------------------------------------
 Auxiliary Function:
     Adds the contents of the Tree to the
@@ -145,6 +130,21 @@ void postorder_aux(TREENODE *node, FOOD *array_postorder, int *i) {
         array_postorder[*i] = node->food;
         (*i) = (*i) + 1;
     }
+}
+
+void preorder_traversal(TREENODE *root, FOOD *array_preorder) {
+    int i = 0;
+    preorder_aux(root, array_preorder, &i);
+}
+
+void inorder_traversal(TREENODE *root, FOOD *array_inorder) {
+    int i = 0;
+    inorder_aux(root, array_inorder, &i);
+}
+
+void postorder_traversal(TREENODE *root, FOOD *array_postorder) {
+    int i = 0;
+    postorder_aux(root, array_postorder, &i);
 }
 
 void bf_traversal(TREENODE *root, FOOD *array_breadth_first) {
