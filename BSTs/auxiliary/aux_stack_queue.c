@@ -10,8 +10,8 @@ Description:
 
 #include <stdio.h>  // Includes Standard Input/Output Header
 #include <stdlib.h> // Includes Standard Library Header
-#include "aux_stack_queue.h"
-#include "tree_common.h"
+#include "auxiliary/aux_stack_queue.h"
+#include "auxiliary/tree_common.h"
 
                         /*    ----------    Array-based Stack    ----------    */
 

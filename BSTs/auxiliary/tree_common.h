@@ -64,7 +64,7 @@ typedef struct treenode {
 
 /*-------------------------------------
 Function:
-    Returns a Pointer to Food
+    Returns a Structure of Food
 Parameters:
     1. Food Name (85 characters as that
        is the longest food name)
@@ -72,9 +72,9 @@ Parameters:
     3. Boolean indicating if the food is vegetarian
     4. Calories of the Food 
 Returns:
-    Pointer to new Food
+    New Food Structure
 -------------------------------------*/
-FOOD *food_init(int calories, const char *food, BOOLEAN is_veg, int origin);
+FOOD food_init(int calories, const char *food[85], BOOLEAN is_veg, int origin);
 
 /*-------------------------------------
 Function:
@@ -104,7 +104,7 @@ Parameters:
 Returns:
     N/A
 -------------------------------------*/
-void food_arr_iter(FOOD *array_foods_bst, int max_length);
+void food_array_iter(FOOD *array_foods_bst, int max_length);
 
 /*-------------------------------------
 Function:
@@ -123,12 +123,10 @@ void food_free(FOOD *me);
 /*-------------------------------------
 Function:
     Adds the contents of the Tree to the
-    array in parameter in Preorder
+    array in Preorder
 Parameters:
     1. The root of the BST
-    2. Array of type FOOD - contents of
-    tree will be added here by the
-    function
+    2. Array of FOOD structs from the Tree
 Returns:
     N/A
 -------------------------------------*/
@@ -137,12 +135,10 @@ void preorder_traversal(TREENODE *root, FOOD *array_preorder);
 /*-------------------------------------
 Function:
     Adds the contents of the Tree to the
-    array in parameter Inorder
+    array Inorder
 Parameters:
     1. The root of the BST
-    2. Array of type FOOD - contents of
-    tree will be added here by the
-    function
+    2. Array of FOOD structs from the Tree
 Returns:
     N/A
 -------------------------------------*/
@@ -151,12 +147,10 @@ void inorder_traversal(TREENODE *root, FOOD *array_inorder);
 /*-------------------------------------
 Function:
     Adds the contents of the Tree to the
-    array in parameter in Postorder
+    array in Postorder
 Parameters:
     1. The root of the BST
-    2. Array of type FOOD - contents of
-    tree will be added here by the
-    function
+    2. Array of FOOD structs from the Tree
 Returns:
     N/A
 -------------------------------------*/
@@ -165,12 +159,10 @@ void postorder_traversal(TREENODE *root, FOOD *array_postorder);
 /*-------------------------------------
 Function:
     Adds the contents of the Tree to the
-    array in parameter level by level
+    array level by level
 Parameters:
     1. The root of the BST
-    2. Array of type FOOD - contents of
-    tree will be added here by the
-    function
+    2. Array of FOOD structs from the Tree
 Returns:
     N/A
 -------------------------------------*/
@@ -179,13 +171,11 @@ void bf_traversal(TREENODE *root, FOOD *array_breadth_first);
 /*-------------------------------------
 Function:
     Adds the contents of the Tree to the
-    array in parameter via depth-first 
-    (Deep followed by wide)
+    array depth-first (Deep followed by
+    wide)
 Parameters:
     1. The root of the BST
-    2. Array of type FOOD - contents of
-    tree will be added here by the
-    function
+    2. Array of FOOD structs from the Tree
     3. Maximum length of the Stack
 Returns:
     N/A
